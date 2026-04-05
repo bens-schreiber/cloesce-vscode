@@ -1,0 +1,232 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Cloesce",
+  "scopeName": "source.cloesce",
+  "patterns": [
+    { "include": "#comment" },
+    { "include": "#sql-block" },
+    { "include": "#use-tag" },
+    { "include": "#source-tag" },
+    { "include": "#internal-tag" },
+    { "include": "#env-block" },
+    { "include": "#model-declaration" },
+    { "include": "#api-declaration" },
+    { "include": "#source-declaration" },
+    { "include": "#service-declaration" },
+    { "include": "#poo-declaration" },
+    { "include": "#inject-declaration" },
+    { "include": "#block-keywords" },
+    { "include": "#http-verbs" },
+    { "include": "#type-keywords" },
+    { "include": "#builtin-types" },
+    { "include": "#generic-types" },
+    { "include": "#string" },
+    { "include": "#arrow" },
+    { "include": "#double-colon" },
+    { "include": "#self-keyword" },
+    { "include": "#identifier" }
+  ],
+  "repository": {
+    "comment": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.cloesce",
+          "match": "//.*$"
+        }
+      ]
+    },
+    "string": {
+      "name": "string.quoted.double.cloesce",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.cloesce",
+          "match": "\\\\."
+        },
+        {
+          "name": "variable.other.interpolation.cloesce",
+          "match": "\\{[^}]+\\}"
+        }
+      ]
+    },
+    "sql-block": {
+      "comment": "sql get/list(...) { \"SQL...\" } — embeds SQL highlighting in the string",
+      "begin": "\\b(sql)\\s+(get|list)\\s*\\(",
+      "beginCaptures": {
+        "1": { "name": "keyword.other.sql.cloesce" },
+        "2": { "name": "keyword.other.crud.cloesce" }
+      },
+      "end": "(?<=\\})",
+      "patterns": [
+        { "include": "#builtin-types" },
+        { "include": "#identifier" },
+        {
+          "comment": "SQL string with embedded SQL highlighting",
+          "begin": "\"",
+          "end": "\"",
+          "name": "meta.embedded.sql.cloesce",
+          "contentName": "source.sql",
+          "patterns": [
+            { "include": "#sql-embedded" }
+          ]
+        }
+      ]
+    },
+    "sql-embedded": {
+      "patterns": [
+        {
+          "name": "variable.other.parameter.sql.cloesce",
+          "match": "\\$[a-zA-Z_][a-zA-Z0-9_]*"
+        },
+        {
+          "name": "keyword.other.DML.sql",
+          "match": "(?i)\\b(SELECT|FROM|WHERE|AND|OR|NOT|IN|LIKE|LIMIT|OFFSET|ORDER\\s+BY|GROUP\\s+BY|HAVING|INSERT|INTO|VALUES|UPDATE|SET|DELETE|JOIN|LEFT|RIGHT|INNER|OUTER|FULL|CROSS|ON|AS|DISTINCT|BETWEEN|EXISTS|UNION|ALL|ANY|CASE|WHEN|THEN|ELSE|END|IS|NULL|CREATE|TABLE|ALTER|DROP|INDEX|PRIMARY|KEY|FOREIGN|REFERENCES|CONSTRAINT|DEFAULT|CHECK|UNIQUE|CASCADE|ASC|DESC|COUNT|SUM|AVG|MIN|MAX|COALESCE|IFNULL|CAST|SUBSTR|LENGTH|TRIM|UPPER|LOWER|REPLACE|ROUND|ABS|GROUP_CONCAT|TOTAL|TYPEOF|GLOB|INSTR|HEX|QUOTE|RANDOM|RANDOMBLOB|ZEROBLOB|NULLIF|IIF|LIKELY|UNLIKELY)\\b"
+        },
+        {
+          "name": "string.other.wildcard.sql",
+          "match": "\\*"
+        },
+        {
+          "name": "constant.numeric.sql",
+          "match": "\\b\\d+(\\.\\d+)?\\b"
+        },
+        {
+          "name": "string.quoted.single.sql",
+          "begin": "'",
+          "end": "'"
+        }
+      ]
+    },
+    "use-tag": {
+      "comment": "[use db, get, save, list]",
+      "begin": "(\\[)\\s*(use)\\b",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.begin.cloesce" },
+        "2": { "name": "keyword.other.use.cloesce" }
+      },
+      "end": "\\]",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.tag.end.cloesce" }
+      },
+      "patterns": [
+        {
+          "name": "variable.other.binding.cloesce",
+          "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b"
+        },
+        {
+          "name": "keyword.other.crud.cloesce",
+          "match": "\\b(get|save|list)\\b"
+        }
+      ]
+    },
+    "source-tag": {
+      "comment": "[source SourceName]",
+      "begin": "(\\[)\\s*(source)\\b",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.begin.cloesce" },
+        "2": { "name": "keyword.other.source.cloesce" }
+      },
+      "end": "\\]",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.tag.end.cloesce" }
+      },
+      "patterns": [
+        {
+          "name": "entity.name.type.source.cloesce",
+          "match": "\\b[A-Z][a-zA-Z0-9_]*\\b"
+        }
+      ]
+    },
+    "internal-tag": {
+      "comment": "[internal]",
+      "match": "(\\[)\\s*(internal)\\s*(\\])",
+      "captures": {
+        "1": { "name": "punctuation.definition.tag.begin.cloesce" },
+        "2": { "name": "keyword.other.internal.cloesce" },
+        "3": { "name": "punctuation.definition.tag.end.cloesce" }
+      }
+    },
+    "env-block": {
+      "match": "\\b(env)\\b",
+      "name": "keyword.declaration.env.cloesce"
+    },
+    "model-declaration": {
+      "match": "\\b(model)\\s+([A-Z][a-zA-Z0-9_]*)\\b",
+      "captures": {
+        "1": { "name": "keyword.declaration.model.cloesce" },
+        "2": { "name": "entity.name.type.model.cloesce" }
+      }
+    },
+    "api-declaration": {
+      "match": "\\b(api)\\s+([A-Z][a-zA-Z0-9_]*)\\b",
+      "captures": {
+        "1": { "name": "keyword.declaration.api.cloesce" },
+        "2": { "name": "entity.name.type.cloesce" }
+      }
+    },
+    "source-declaration": {
+      "match": "\\b(source)\\s+([A-Z][a-zA-Z0-9_]*)\\s+(for)\\s+([A-Z][a-zA-Z0-9_]*)\\b",
+      "captures": {
+        "1": { "name": "keyword.declaration.source.cloesce" },
+        "2": { "name": "entity.name.type.source.cloesce" },
+        "3": { "name": "keyword.other.for.cloesce" },
+        "4": { "name": "entity.name.type.model.cloesce" }
+      }
+    },
+    "service-declaration": {
+      "match": "\\b(service)\\s+([A-Z][a-zA-Z0-9_]*)\\b",
+      "captures": {
+        "1": { "name": "keyword.declaration.service.cloesce" },
+        "2": { "name": "entity.name.type.service.cloesce" }
+      }
+    },
+    "poo-declaration": {
+      "match": "\\b(poo)\\s+([A-Z][a-zA-Z0-9_]*)\\b",
+      "captures": {
+        "1": { "name": "keyword.declaration.poo.cloesce" },
+        "2": { "name": "entity.name.type.poo.cloesce" }
+      }
+    },
+    "inject-declaration": {
+      "match": "\\b(inject)\\b",
+      "name": "keyword.declaration.inject.cloesce"
+    },
+    "block-keywords": {
+      "match": "\\b(primary|foreign|unique|nav|keyfield|include|crud|exposes|paginated|optional)\\b",
+      "name": "keyword.other.cloesce"
+    },
+    "http-verbs": {
+      "match": "\\b(get|post|put|patch|delete)\\b",
+      "name": "keyword.other.http-verb.cloesce"
+    },
+    "type-keywords": {
+      "match": "\\b(d1|r2|kv|vars|sql|save|list)\\b",
+      "name": "keyword.other.storage.cloesce"
+    },
+    "builtin-types": {
+      "match": "\\b(string|int|double|date|bool|json|void|blob|stream)\\b",
+      "name": "support.type.primitive.cloesce"
+    },
+    "generic-types": {
+      "match": "\\b(Option|Array|Paginated|KvObject|R2Object|Partial|DataSource)\\b",
+      "name": "support.type.generic.cloesce"
+    },
+    "arrow": {
+      "match": "->",
+      "name": "keyword.operator.arrow.cloesce"
+    },
+    "double-colon": {
+      "match": "::",
+      "name": "keyword.operator.namespace.cloesce"
+    },
+    "self-keyword": {
+      "match": "\\b(self)\\b",
+      "name": "variable.language.self.cloesce"
+    },
+    "identifier": {
+      "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b",
+      "name": "variable.other.cloesce"
+    }
+  }
+}
