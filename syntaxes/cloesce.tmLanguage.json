@@ -3,29 +3,72 @@
   "name": "Cloesce",
   "scopeName": "source.cloesce",
   "patterns": [
-    { "include": "#comment" },
-
-    { "include": "#arrow" },
-    { "include": "#double-colon" },
-    { "include": "#sql-block" },
-    { "include": "#use-tag" },
-    { "include": "#source-tag" },
-    { "include": "#internal-tag" },
-    { "include": "#env-block" },
-    { "include": "#model-declaration" },
-    { "include": "#api-declaration" },
-    { "include": "#source-declaration" },
-    { "include": "#service-declaration" },
-    { "include": "#poo-declaration" },
-    { "include": "#inject-declaration" },
-    { "include": "#block-keywords" },
-    { "include": "#http-verbs" },
-    { "include": "#type-keywords" },
-    { "include": "#builtin-types" },
-    { "include": "#generic-types" },
-    { "include": "#string" },
-    { "include": "#self-keyword" },
-    { "include": "#identifier" }
+    {
+      "include": "#comment"
+    },
+    {
+      "include": "#arrow"
+    },
+    {
+      "include": "#double-colon"
+    },
+    {
+      "include": "#sql-block"
+    },
+    {
+      "include": "#use-tag"
+    },
+    {
+      "include": "#source-tag"
+    },
+    {
+      "include": "#internal-tag"
+    },
+    {
+      "include": "#env-block"
+    },
+    {
+      "include": "#model-declaration"
+    },
+    {
+      "include": "#api-declaration"
+    },
+    {
+      "include": "#source-declaration"
+    },
+    {
+      "include": "#service-declaration"
+    },
+    {
+      "include": "#poo-declaration"
+    },
+    {
+      "include": "#inject-declaration"
+    },
+    {
+      "include": "#block-keywords"
+    },
+    {
+      "include": "#http-verbs"
+    },
+    {
+      "include": "#type-keywords"
+    },
+    {
+      "include": "#builtin-types"
+    },
+    {
+      "include": "#generic-types"
+    },
+    {
+      "include": "#string"
+    },
+    {
+      "include": "#self-keyword"
+    },
+    {
+      "include": "#identifier"
+    }
   ],
   "repository": {
     "comment": {
@@ -55,13 +98,21 @@
       "comment": "sql get/list(...) { \"SQL...\" } — embeds SQL highlighting in the string",
       "begin": "\\b(sql)\\s+(get|list)\\s*\\(",
       "beginCaptures": {
-        "1": { "name": "keyword.other.sql.cloesce" },
-        "2": { "name": "keyword.other.storage.cloesce" }
+        "1": {
+          "name": "keyword.other.sql.cloesce"
+        },
+        "2": {
+          "name": "variable.other.cloesce"
+        }
       },
       "end": "(?<=\\})",
       "patterns": [
-        { "include": "#builtin-types" },
-        { "include": "#identifier" },
+        {
+          "include": "#builtin-types"
+        },
+        {
+          "include": "#identifier"
+        },
         {
           "comment": "SQL string with embedded SQL highlighting",
           "begin": "\"",
@@ -69,7 +120,9 @@
           "name": "meta.embedded.sql.cloesce",
           "contentName": "source.sql",
           "patterns": [
-            { "include": "#sql-embedded" }
+            {
+              "include": "#sql-embedded"
+            }
           ]
         }
       ]
@@ -100,15 +153,21 @@
       ]
     },
     "use-tag": {
-      "comment": "[use db, get, save, list]",
+      "comment": "[use binding, get, save, list]",
       "begin": "(\\[)\\s*(use)\\b",
       "beginCaptures": {
-        "1": { "name": "punctuation.definition.tag.begin.cloesce" },
-        "2": { "name": "keyword.other.use.cloesce" }
+        "1": {
+          "name": "punctuation.definition.tag.begin.cloesce"
+        },
+        "2": {
+          "name": "keyword.other.use.cloesce"
+        }
       },
       "end": "\\]",
       "endCaptures": {
-        "0": { "name": "punctuation.definition.tag.end.cloesce" }
+        "0": {
+          "name": "punctuation.definition.tag.end.cloesce"
+        }
       },
       "patterns": [
         {
@@ -125,12 +184,18 @@
       "comment": "[source SourceName]",
       "begin": "(\\[)\\s*(source)\\b",
       "beginCaptures": {
-        "1": { "name": "punctuation.definition.tag.begin.cloesce" },
-        "2": { "name": "keyword.other.source.cloesce" }
+        "1": {
+          "name": "punctuation.definition.tag.begin.cloesce"
+        },
+        "2": {
+          "name": "keyword.other.source.cloesce"
+        }
       },
       "end": "\\]",
       "endCaptures": {
-        "0": { "name": "punctuation.definition.tag.end.cloesce" }
+        "0": {
+          "name": "punctuation.definition.tag.end.cloesce"
+        }
       },
       "patterns": [
         {
@@ -143,9 +208,15 @@
       "comment": "[internal]",
       "match": "(\\[)\\s*(internal)\\s*(\\])",
       "captures": {
-        "1": { "name": "punctuation.definition.tag.begin.cloesce" },
-        "2": { "name": "keyword.other.internal.cloesce" },
-        "3": { "name": "punctuation.definition.tag.end.cloesce" }
+        "1": {
+          "name": "punctuation.definition.tag.begin.cloesce"
+        },
+        "2": {
+          "name": "keyword.other.internal.cloesce"
+        },
+        "3": {
+          "name": "punctuation.definition.tag.end.cloesce"
+        }
       }
     },
     "env-block": {
@@ -155,38 +226,62 @@
     "model-declaration": {
       "match": "\\b(model)\\s+([A-Z][a-zA-Z0-9_]*)\\b",
       "captures": {
-        "1": { "name": "keyword.declaration.model.cloesce" },
-        "2": { "name": "entity.name.type.model.cloesce" }
+        "1": {
+          "name": "keyword.declaration.model.cloesce"
+        },
+        "2": {
+          "name": "entity.name.type.model.cloesce"
+        }
       }
     },
     "api-declaration": {
       "match": "\\b(api)\\s+([A-Z][a-zA-Z0-9_]*)\\b",
       "captures": {
-        "1": { "name": "keyword.declaration.api.cloesce" },
-        "2": { "name": "entity.name.type.cloesce" }
+        "1": {
+          "name": "keyword.declaration.api.cloesce"
+        },
+        "2": {
+          "name": "entity.name.type.cloesce"
+        }
       }
     },
     "source-declaration": {
       "match": "\\b(source)\\s+([A-Z][a-zA-Z0-9_]*)\\s+(for)\\s+([A-Z][a-zA-Z0-9_]*)\\b",
       "captures": {
-        "1": { "name": "keyword.declaration.source.cloesce" },
-        "2": { "name": "entity.name.type.source.cloesce" },
-        "3": { "name": "keyword.other.for.cloesce" },
-        "4": { "name": "entity.name.type.model.cloesce" }
+        "1": {
+          "name": "keyword.declaration.source.cloesce"
+        },
+        "2": {
+          "name": "entity.name.type.source.cloesce"
+        },
+        "3": {
+          "name": "keyword.other.for.cloesce"
+        },
+        "4": {
+          "name": "entity.name.type.model.cloesce"
+        }
       }
     },
     "service-declaration": {
       "match": "\\b(service)\\s+([A-Z][a-zA-Z0-9_]*)\\b",
       "captures": {
-        "1": { "name": "keyword.declaration.service.cloesce" },
-        "2": { "name": "entity.name.type.service.cloesce" }
+        "1": {
+          "name": "keyword.declaration.service.cloesce"
+        },
+        "2": {
+          "name": "entity.name.type.service.cloesce"
+        }
       }
     },
     "poo-declaration": {
       "match": "\\b(poo)\\s+([A-Z][a-zA-Z0-9_]*)\\b",
       "captures": {
-        "1": { "name": "keyword.declaration.poo.cloesce" },
-        "2": { "name": "entity.name.type.poo.cloesce" }
+        "1": {
+          "name": "keyword.declaration.poo.cloesce"
+        },
+        "2": {
+          "name": "entity.name.type.poo.cloesce"
+        }
       }
     },
     "inject-declaration": {
@@ -194,30 +289,14 @@
       "name": "keyword.declaration.inject.cloesce"
     },
     "block-keywords": {
-      "match": "\\b(primary|foreign|unique|nav|keyfield|include|crud|exposes|paginated|optional)\\b",
+      "match": "\\b(primary|foreign|unique|nav|keyfield|include|paginated|optional)\\b",
       "name": "keyword.other.cloesce"
     },
     "http-verbs": {
       "patterns": [
         {
-          "match": "\\b(get)\\b",
-          "name": "http.verb.get.cloesce"
-        },
-        {
-          "match": "\\b(post)\\b",
-          "name": "http.verb.post.cloesce"
-        },
-        {
-          "match": "\\b(put)\\b",
-          "name": "http.verb.put.cloesce"
-        },
-        {
-          "match": "\\b(patch)\\b",
-          "name": "http.verb.patch.cloesce"
-        },
-        {
-          "match": "\\b(delete)\\b",
-          "name": "http.verb.delete.cloesce"
+          "match": "\\b(get|post|put|patch|delete)\\b",
+          "name": "entity.name.function.http.cloesce"
         }
       ]
     },
@@ -226,11 +305,11 @@
       "name": "keyword.other.storage.cloesce"
     },
     "builtin-types": {
-      "match": "\\b(string|int|double|date|bool|json|void|blob|stream)\\b",
+      "match": "\\b(string|int|double|date|bool|json|void|blob|stream|R2Object)\\b",
       "name": "support.type.primitive.cloesce"
     },
     "generic-types": {
-      "match": "\\b(Option|Array|Paginated|KvObject|R2Object|Partial|DataSource)\\b",
+      "match": "\\b(Option|Array|Paginated|KvObject|Partial|DataSource)\\b",
       "name": "support.type.generic.cloesce"
     },
     "arrow": {
