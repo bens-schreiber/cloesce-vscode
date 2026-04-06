@@ -3,7 +3,7 @@
   "displayName": "Cloesce",
   "description": "Syntax highlighting for the Cloesce schema language",
   "version": "0.1.0",
-  "publisher": "cloesce",
+  "publisher": "BenjaminSchreiber",
   "engines": {
     "vscode": "^1.75.0"
   },

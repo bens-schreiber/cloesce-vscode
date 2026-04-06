@@ -1,6 +1,13 @@
 # Cloesce VS Code Extension
 
-Syntax highlighting for `.cloesce` and `.clo` schema files.
+> [!NOTE]
+> The current build supports only syntax highlighting. LSP support is planned for a future release.
+
+Syntax highlighting for the Cloesce schema language (`.clo`, `.cloesce`)
+
+## Documentation
+
+- [Cloesce Schema Language Reference](https://cloesce.pages.dev)
 
 ## Features
 
@@ -8,12 +15,3 @@ Syntax highlighting for `.cloesce` and `.clo` schema files.
 - SQL highlighting inside `sql` blocks
 - Bracket matching and auto-closing
 - Region folding (`//#region` / `//#endregion`)
-
-## Install from source
-
-```bash
-npm install -g @vscode/vsce
-cd cloesce-vscode
-vsce package
-code --install-extension cloesce-0.1.0.vsix
-```
