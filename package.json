@@ -1,6 +1,6 @@
 {
-  "name": "cloesce",
-  "displayName": "Cloesce",
+  "name": "cloesce-lang",
+  "displayName": "Cloesce Language Support",
   "description": "Syntax highlighting for the Cloesce schema language",
   "version": "0.1.0",
   "publisher": "BenSchreiber",
