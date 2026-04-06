@@ -36,6 +36,36 @@
         "scopeName": "source.cloesce",
         "path": "./syntaxes/cloesce.tmLanguage.json"
       }
-    ]
+    ],
+    "configurationDefaults": {
+      "editor.tokenColorCustomizations": {
+        "textMateRules": [
+          {
+            "scope": "http.verb.get.cloesce",
+            "settings": { "foreground": "#61AFEF", "fontStyle": "bold" }
+          },
+          {
+            "scope": "http.verb.post.cloesce",
+            "settings": { "foreground": "#98C379", "fontStyle": "bold" }
+          },
+          {
+            "scope": "http.verb.put.cloesce",
+            "settings": { "foreground": "#E5C07B", "fontStyle": "bold" }
+          },
+          {
+            "scope": "http.verb.patch.cloesce",
+            "settings": { "foreground": "#D19A66", "fontStyle": "bold" }
+          },
+          {
+            "scope": "http.verb.delete.cloesce",
+            "settings": { "foreground": "#E06C75", "fontStyle": "bold" }
+          },
+          {
+            "scope": "punctuation.separator.arrow.cloesce",
+            "settings": { "foreground": "#ABB2BF" }
+          }
+        ]
+      }
+    }
   }
 }
