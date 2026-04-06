@@ -1,7 +1,6 @@
 # Cloesce VS Code Extension
 
-> [!NOTE]
-> The current build supports only syntax highlighting. LSP support is planned for a future release.
+> NOTE: The current build supports only syntax highlighting. LSP support is planned for a future release.
 
 Syntax highlighting for the Cloesce schema language (`.clo`, `.cloesce`)
 
